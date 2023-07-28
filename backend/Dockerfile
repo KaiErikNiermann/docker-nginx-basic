@@ -10,8 +10,6 @@ COPY ./backend/package*.json ./
 # Install dependencies
 RUN npm install
 
-RUN npm install pm2@latest -g
-
 COPY ./backend .
 
 EXPOSE 3000
