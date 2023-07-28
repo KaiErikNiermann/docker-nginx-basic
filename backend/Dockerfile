@@ -9,14 +9,10 @@ COPY ./backend/package*.json ./
 
 # Install dependencies
 RUN npm install
-
 RUN npm install pm2@latest -g
 
-# Copy the rest of the backend code to the container
 COPY ./backend .
 
-# Expose the port on which the backend server will run (adjust if your backend uses a different port)
 EXPOSE 3000
 
-# Start the Node.js backend using pm2
 CMD ["pm2", "start", "app.js"]
