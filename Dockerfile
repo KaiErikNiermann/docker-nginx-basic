@@ -8,10 +8,6 @@ WORKDIR /usr/share/nginx/html
 
 # Copy the contents of the ~/docker-nginx/data directory to the container's /usr/share/nginx/html directory
 COPY ./data .
-COPY ./backend .
-
-# Install express to run the server
-RUN npm install express
 
 # Copy the default.conf file from the ~/docker-nginx/ directory to the container's /etc/nginx/conf.d/ directory
 COPY ./default.conf /etc/nginx/sites-available/default
