@@ -5,13 +5,14 @@ FROM node:latest
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the container
-COPY package*.json ./
+COPY ./backend/package*.json ./
 
 # Install dependencies
 RUN npm install
+
 RUN npm install pm2@latest -g
 
-COPY . .
+COPY ./backend .
 
 EXPOSE 3000
 
