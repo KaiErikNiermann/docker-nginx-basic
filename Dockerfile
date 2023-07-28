@@ -1,11 +1,17 @@
 # Use the official Nginx base image from Docker Hub
-FROM nginx
+FROM node:latest
 
-# Set the working directory in the container
-WORKDIR /usr/share/nginx/html
+WORKDIR /app
 
 # Copy the contents of the ~/docker-nginx/data directory to the container's /usr/share/nginx/html directory
-COPY ./data /usr/share/nginx/html
+COPY ./data .
+COPY ./backend .
+
+# Install Nginx
+RUN apt-get -y update && apt-get -y install nginx
+
+# Install express to run the server
+RUN npm install express
 
 # Copy the default.conf file from the ~/docker-nginx/ directory to the container's /etc/nginx/conf.d/ directory
 COPY ./default.conf /etc/nginx/conf.d/default.conf
