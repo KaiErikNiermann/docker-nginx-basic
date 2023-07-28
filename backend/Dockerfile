@@ -10,6 +10,8 @@ COPY ./backend/package*.json ./
 # Install dependencies
 RUN npm install
 
+RUN npm install pm2@latest -g
+
 # Copy the rest of the backend code to the container
 COPY ./backend .
 
