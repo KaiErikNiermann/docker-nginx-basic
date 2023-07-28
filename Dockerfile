@@ -14,7 +14,7 @@ COPY ./backend .
 RUN npm install express
 
 # Copy the default.conf file from the ~/docker-nginx/ directory to the container's /etc/nginx/conf.d/ directory
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY ./default.conf /etc/nginx/sites-available/default
 
 # Expose port 80 for incoming HTTP traffic
 EXPOSE 80
