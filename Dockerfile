@@ -1,14 +1,14 @@
 # Use the official Nginx base image from Docker Hub
 FROM node:latest
 
-WORKDIR /app
+# Install Nginx
+RUN apt-get -y update && apt-get -y install nginx
+
+WORKDIR /usr/share/nginx/html
 
 # Copy the contents of the ~/docker-nginx/data directory to the container's /usr/share/nginx/html directory
 COPY ./data .
 COPY ./backend .
-
-# Install Nginx
-RUN apt-get -y update && apt-get -y install nginx
 
 # Install express to run the server
 RUN npm install express
