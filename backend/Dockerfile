@@ -16,5 +16,5 @@ COPY ./backend .
 # Expose the port on which the backend server will run (adjust if your backend uses a different port)
 EXPOSE 3000
 
-# Start the Node.js backend server
-CMD ["node", "app.js"]
+# Start the Node.js backend using pm2
+CMD ["pm2", "start", "app.js"]
