@@ -14,3 +14,11 @@ services:
       - "80:80"
     depends_on:
       - backend
+  cetbot:
+    image: certbot/certbot
+    volumes:
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
+    depends_on:
+      - nginx
+    command: certonly --webroot -w /var/www/certbot --force-renewal --email {kai.niermann@gmail.com} -d {asdfxyz.xyz} --agree-tos
