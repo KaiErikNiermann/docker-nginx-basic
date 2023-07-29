@@ -13,11 +13,7 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-
-            - uses: webfactory/ssh-agent@v0.7.0
-              with:
-                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-    
+      
             - name: Install doctl
               uses: digitalocean/action-doctl@v2
               with:
@@ -29,7 +25,9 @@ jobs:
 
             - name: Deploy to server droplet
               run: | 
-                docktl compute ssh testing-server '
+                echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key 
+                chmod 600 private_key
+                ssh -o StrictHostKeyChecking=no -i private_key root@68.183.215.151 '
                     cd docker-nginx && 
                     get fetch --all && 
                     git reset --hard origin/node_docker_nginx &&
