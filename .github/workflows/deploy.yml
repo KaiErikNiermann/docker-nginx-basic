@@ -25,8 +25,8 @@ jobs:
 
             - name: Deploy to server droplet
               run: | 
-                echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-                doctl compute ssh testing-server '
+                echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key
+                ssh -i private_key root@68.183.215.151 '
                     cd docker-nginx && 
                     get fetch --all && 
                     git reset --hard origin/node_docker_nginx &&
