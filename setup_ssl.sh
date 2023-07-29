@@ -1,7 +1,7 @@
 #!/bin/bash
 
 email_arg="--email k.e.niermann@student.vu.nl"
-domain_args="asdfxyz.xyz"
+domain_args="-d asdfxyz.xyz"
 
 docker compose run --rm --entrypoint "\
   certbot certonly --webroot -w /var/www/certbot \
