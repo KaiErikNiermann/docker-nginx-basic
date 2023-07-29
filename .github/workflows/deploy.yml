@@ -29,6 +29,7 @@ jobs:
               with:
                 token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
                 
+            # TODO : Add automatic droplet creation
             - name: Make sure droplet active and running
               run: |
                 doctl compute droplet list --format PublicIPv4 | awk 'NR==2 && $1!="68.183.215.151" {exit}'
