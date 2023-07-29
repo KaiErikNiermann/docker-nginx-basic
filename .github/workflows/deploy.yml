@@ -13,17 +13,17 @@ jobs:
         steps:
             - name: Checkout code
               uses: actions/checkout@v2
-              env: 
+
+            - name: Setup SSH and known hosts
+              env:
                 PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
                 USERNAME: ${{ secrets.USERNAME }}
                 HOSTNAME: ${{ secrets.HOSTNAME }}
-
-            - name: Setup SSH and known hosts
               run: |
                 mkdir -p ~/.ssh
                 echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
                 chmod 600 ~/.ssh/id_rsa
-                ssh-keyscan $HOSTNAME >> ~/.ssh/known_hosts
+                ssh-keyscan ${HOSTNAME} >> ~/.ssh/known_hosts
                 chmod 644 ~/.ssh/known_hosts
       
             - name: Install doctl
@@ -34,9 +34,12 @@ jobs:
             # TODO : Add automatic droplet creation
             - name: Make sure droplet active and running
               run: |
-                doctl compute droplet list --format PublicIPv4 | awk 'NR==2 && $1!="$HOSTNAME" {exit}'
+                doctl compute droplet list --format PublicIPv4 | awk 'NR==2 && $1!="${{ secrets.HOSTNAME }}" {exit}'
 
             - name: Deploy to server droplet
+              env: 
+                USERNAME: ${{ secrets.USERNAME }}
+                HOSTNAME: ${{ secrets.HOSTNAME }}
               run: | 
                 ssh ${USERNAME}@${HOSTNAME} '
 
