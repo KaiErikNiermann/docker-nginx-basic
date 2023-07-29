@@ -1,0 +1,53 @@
+name: deploy-web-server
+
+on: 
+    push:
+        branches:
+        - node_docker_nginx
+
+jobs:
+    deploy: 
+        name: deploy in droplet 
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v2
+
+            - name: Setup SSH and known hosts
+              env:
+                PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+                USERNAME: ${{ secrets.USERNAME }}
+                HOSTNAME: ${{ secrets.HOSTNAME }}
+              run: |
+                mkdir -p ~/.ssh
+                echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
+                chmod 600 ~/.ssh/id_rsa
+                ssh-keyscan ${HOSTNAME} >> ~/.ssh/known_hosts
+                chmod 644 ~/.ssh/known_hosts
+      
+            - name: Install doctl
+              uses: digitalocean/action-doctl@v2
+              with:
+                token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+                
+            # TODO : Add automatic droplet creation
+            - name: Make sure droplet active and running
+              run: |
+                doctl compute droplet list --format PublicIPv4 | awk 'NR==2 && $1!="${{ secrets.HOSTNAME }}" {exit}'
+
+            - name: Deploy to server droplet
+              env: 
+                USERNAME: ${{ secrets.USERNAME }}
+                HOSTNAME: ${{ secrets.HOSTNAME }}
+              run: | 
+                ssh ${USERNAME}@${HOSTNAME} '
+
+                    cd docker-nginx-basic && 
+                    git fetch --all && 
+                    git reset --hard origin/node_docker_nginx &&
+                    git pull origin node_docker_nginx &&
+                    docker-compose up -d --build
+                    '
+                    
+                
