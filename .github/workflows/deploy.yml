@@ -38,9 +38,10 @@ jobs:
               run: | 
                 doctl compute ssh testing-server '
 
-                    cd docker-nginx && 
+                    cd docker-nginx-basic && 
                     get fetch --all && 
                     git reset --hard origin/node_docker_nginx &&
                     git pull origin node_docker_nginx &&
                     docker-compose up -d --build
+                    
                 '
