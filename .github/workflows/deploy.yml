@@ -35,7 +35,7 @@ jobs:
 
             - name: Deploy to server droplet
               run: | 
-                ssh root@68.183.215.151 '
+                sudo ssh root@68.183.215.151 '
 
                     cd docker-nginx && 
                     get fetch --all && 
