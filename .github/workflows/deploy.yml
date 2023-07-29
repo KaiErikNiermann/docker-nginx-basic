@@ -38,7 +38,7 @@ jobs:
 
             - name: Deploy to server droplet
               run: | 
-                ssh $USERNAME@$HOSTNAME '
+                ssh ${USERNAME}@${HOSTNAME} '
 
                     cd docker-nginx-basic && 
                     git fetch --all && 
