@@ -1,3 +1,11 @@
-# docker-nginx-basic
+# Docker/Nginx/DigitalOcean web-server
 
-This is a basic example of creating a docker image which serves static content using nginx and also has a route that acts as a reverse proxy to a server running on a different port.
+## basic idea and technologies
+
+This is a basic example of a simple server making use of various technologies such as:
+
+- `nginx` : Web server and reverse proxy
+- `DigitalOcean Droplet` : Cloud VM which is running the server
+- `docker-compose` : To orchestrate the `nginx` and `express` server containers
+- `certbot` : To get the SSL certificates
+- `workflow` : To automatically deploy the server via ssh to the vm
