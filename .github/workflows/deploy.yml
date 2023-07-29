@@ -3,7 +3,7 @@ name: deploy-web-server
 on: 
     push:
         branches:
-        - node_docker_nginx
+        - main
 
 jobs:
     deploy: 
@@ -45,8 +45,8 @@ jobs:
 
                     cd docker-nginx-basic && 
                     git fetch --all && 
-                    git reset --hard origin/node_docker_nginx &&
-                    git pull origin node_docker_nginx &&
+                    git reset --hard origin/main &&
+                    git pull origin main &&
                     docker-compose up -d --build
                     '
                     
