@@ -1,12 +1,14 @@
 version: '3'
 services:
   backend:
+    container_name: backend
     build:
       context: .
       dockerfile: backend/Dockerfile
     ports:
       - "3000:3000"
   nginx:
+    container_name: nginx
     build:
       context: .
       dockerfile: Dockerfile
@@ -19,10 +21,10 @@ services:
     depends_on:
       - backend
   certbot:
+    container_name: certbot
     image: certbot/certbot:latest
     volumes:
       - ./certbot/conf:/etc/letsencrypt:rw
       - ./certbot/www:/var/www/certbot:rw
     depends_on:
       - nginx
-    command: certonly --webroot -w /var/www/certbot --email k.e.niermann@student.vu.nl -d asdfxyz.xyz --agree-tos --force-renewal
