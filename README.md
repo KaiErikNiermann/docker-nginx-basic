@@ -1,6 +1,10 @@
-# Docker/Nginx/DigitalOcean web-server
+# Docker/Nginx/DigitalOcean web server
 
-## basic idea and technologies
+## Why
+
+While there are likely more straightforward approaches when it comes to manually setting up some hosting configuration this was personally a nice exploration into some of the more low-level aspects of hosting and deployment and I hope it helps anyone else aswell.
+
+## Basic idea and Technologies
 
 This is a basic example of a simple server making use of various technologies such as:
 
