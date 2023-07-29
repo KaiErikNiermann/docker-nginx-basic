@@ -14,16 +14,10 @@ jobs:
             - name: Checkout code
               uses: actions/checkout@v2
 
-            - name: Setup SSH and known hosts
-              env:
-                PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-              run: |
-                mkdir -p ~/.ssh
-                echo "$PRIVATE_KEY" > ~/.ssh/id_rsa
-                chmod 600 ~/.ssh/id_rsa
-                ssh-keyscan 68.183.215.151 >> ~/.ssh/known_hosts
-                chmod 644 ~/.ssh/known_hosts
-
+            - name: Use SSH key for deployment
+              uses: webfactory/ssh-agent@v0.5.1
+              with:
+                ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       
             - name: Install doctl
               uses: digitalocean/action-doctl@v2
