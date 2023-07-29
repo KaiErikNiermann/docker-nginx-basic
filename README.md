@@ -12,7 +12,7 @@ This is a basic example of a simple server making use of various technologies su
 
 ## In more detail
 
-So there are various aspects to this, but we can break it down into parts. 
+So there are various aspects to this, but we can break it down into parts.
 
 ### 1. The nginx server
 
@@ -20,9 +20,9 @@ The core aspect here is the nginx server, we created a custom config to run a ba
 
 After this when the server runs it includes this configuration in its main `nginx.conf` file.
 
-### 2. nginx Dockerfile 
+### 2. nginx Dockerfile
 
-The nginx docker image by default looks in `/usr/share/nginx/html` for content so we copy over the contents of the `data` folder here. 
+The nginx docker image by default looks in `/usr/share/nginx/html` for content so we copy over the contents of the `data` folder here.
 
 #### html
 
