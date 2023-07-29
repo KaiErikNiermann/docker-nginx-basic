@@ -14,7 +14,7 @@ services:
       - "80:80"
     depends_on:
       - backend
-  cetbot:
+  certbot:
     image: certbot/certbot
     volumes:
       - ./certbot/conf:/etc/letsencrypt
