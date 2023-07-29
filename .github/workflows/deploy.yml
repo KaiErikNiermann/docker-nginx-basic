@@ -36,13 +36,13 @@ jobs:
 
             - name: Deploy to server droplet
               run: | 
-                doctl compute ssh testing-server '
-                
-                cd docker-nginx-basic && 
-                git fetch --all && 
-                git reset --hard origin/node_docker_nginx &&
-                git pull origin node_docker_nginx &&
-                docker-compose up -d --build
-                '
+                ssh root@68.183.215.151 '
+
+                    cd docker-nginx-basic && 
+                    git fetch --all && 
+                    git reset --hard origin/node_docker_nginx &&
+                    git pull origin node_docker_nginx &&
+                    docker-compose up -d --build
+                    '
                     
                 
