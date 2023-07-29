@@ -23,7 +23,7 @@
 
 ## Why
 
-While there are likely more straightforward approaches when it comes to manually setting up some hosting configuration, this was personally a nice exploration into some of the more low-level aspects of hosting and deployment, and I hope it helps anyone else as well.
+While there are likely more straightforward approaches when it comes to manually setting up some hosting configuration, this was personally a nice exploration into some of the more low-level aspects of hosting and deployment, and I hope it helps anyone else as well. Additionally its nice to have a reference for some of the fundamentals.
 
 ## Basic Idea and Technologies
 
