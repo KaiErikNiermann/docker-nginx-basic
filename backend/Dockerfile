@@ -4,12 +4,10 @@ FROM node:latest
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json to the container
-COPY ./backend/package*.json ./
+# Copy package.json, package-lock.json and app.js
+COPY ./backend .
 
 RUN npm install
-
-COPY ./backend .
 
 EXPOSE 3000
 
