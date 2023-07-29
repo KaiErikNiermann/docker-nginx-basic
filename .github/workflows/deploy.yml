@@ -3,7 +3,7 @@ name: deploy-web-server
 on: 
     push:
         branches:
-        - main
+        - node_docker_nginx
 
 jobs:
     deploy: 
