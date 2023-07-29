@@ -25,7 +25,7 @@ jobs:
 
             - name: Deploy to server droplet
               run: | 
-                echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key
+                echo "${{ secrets.SSH_PRIVATE_KEY }}" > private_key && chmod 600 private_key
                 ssh -i private_key root@68.183.215.151 '
                     cd docker-nginx && 
                     get fetch --all && 
