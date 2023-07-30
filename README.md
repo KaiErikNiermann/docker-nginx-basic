@@ -126,17 +126,19 @@ location /api/ {
 
 Finally, we use certbot to get an SSL certificate for the domain. Doing this isn't too hard. We simply need to add the certbot container to the compose file, as we are doing here.
 
-```yml
-  ...
-  certbot:
-    image: certbot/certbot:latest
-    container_name: certbot
-    volumes:
-      - ./certbot/conf:/etc/letsencrypt:rw
-      - ./certbot/www:/var/www/certbot:rw
-    depends_on:
-      - nginx
-    command: certonly --webroot -w /var/www/certbot --email example@example.com -d your_domain.com --agree-tos --force-renewal
+```sh
+#!/bin/bash
+
+email_arg="--email example@example.com"
+domain_args="-d example.com"
+
+docker compose run --rm --entrypoint "\
+  certbot certonly --webroot -w /var/www/certbot \
+    $email_arg \
+    $domain_args \
+    --agree-tos \
+    --force-renewal" certbot
+echo
 ```
 
 To then get the certificate, we can run just the certbot container using the command `docker-compose up -d certbot`, and then we can check the logs to see if we have acquired the certificate for the domain `docker logs certbot`.
