@@ -124,7 +124,13 @@ location /api/ {
 
 ### 4. Certbot and SSL
 
-Finally, we use certbot to get an SSL certificate for the domain. Doing this isn't too hard. We simply need to add the certbot container and then we can use a basic docker command to generate the certs in the correct folders.
+I would recommend you first test acquiring the certificats using the `--dry-run` flag to make sure yoru configuration is setup correctly, because you can get locked out of acquiring certificates if something fails too many times.
+
+```bash
+docker compose run --rm  certbot certonly --webroot --webroot-path /var/www/certbot/ -d example.org
+```
+
+Finally, we get the actual certificates for the domain. For this I made a bash script which you can run with `chmod +x setup_ssl.sh && ./setup_ssl.sh`. You can also just pass the volumes in the command directly, to do so alter the script below based on the official documentation, but in either case the container places the certificate files in the specified volumes on your system.
 
 ```sh
 #!/bin/bash
