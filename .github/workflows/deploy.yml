@@ -36,17 +36,17 @@ jobs:
               run: |
                 doctl compute droplet list --format PublicIPv4 | awk 'NR==2 && $1!="${{ secrets.HOSTNAME }}" {exit}'
 
-            # - name: Deploy to server droplet
-            #   env: 
-            #     USERNAME: ${{ secrets.USERNAME }}
-            #     HOSTNAME: ${{ secrets.HOSTNAME }}
-            #   run: | 
-            #     ssh ${USERNAME}@${HOSTNAME} '
+            - name: Deploy to server droplet
+              env: 
+                USERNAME: ${{ secrets.USERNAME }}
+                HOSTNAME: ${{ secrets.HOSTNAME }}
+              run: | 
+                ssh ${USERNAME}@${HOSTNAME} '
 
-            #         cd docker-nginx-basic && 
-            #         git fetch --all && 
-            #         git pull origin main &&
-            #         docker-compose up -d --build
-            #         '
+                    cd docker-nginx-basic && 
+                    git fetch --all && 
+                    git pull origin main &&
+                    docker-compose up -d --build
+                    '
                     
                 

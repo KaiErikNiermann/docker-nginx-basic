@@ -124,7 +124,7 @@ location /api/ {
 
 ### 4. Certbot and SSL
 
-Finally, we use certbot to get an SSL certificate for the domain. Doing this isn't too hard. We simply need to add the certbot container to the compose file, as we are doing here.
+Finally, we use certbot to get an SSL certificate for the domain. Doing this isn't too hard. We simply need to add the certbot container and then we can use a basic docker command to generate the certs in the correct folders.
 
 ```sh
 #!/bin/bash
@@ -140,8 +140,6 @@ docker compose run --rm --entrypoint "\
     --force-renewal" certbot
 echo
 ```
-
-To then get the certificate, we can run just the certbot container using the command `docker-compose up -d certbot`, and then we can check the logs to see if we have acquired the certificate for the domain `docker logs certbot`.
 
 ### 5. The Workflow
 
