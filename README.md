@@ -1,8 +1,13 @@
 # Docker/Nginx/DigitalOcean Web Server
 
+## Disclaimer
+
+This is a *very* basic configuration, while I will likely work on improving it, it most likely is not a very secure setup, so I do not recommend using this for hosting sensitive information.
+
 ## Table of Contents
 
 - [Docker/Nginx/DigitalOcean Web Server](#dockernginxdigitalocean-web-server)
+  - [Disclaimer](#disclaimer)
   - [Table of Contents](#table-of-contents)
   - [Why](#why)
   - [Basic Idea and Technologies](#basic-idea-and-technologies)
