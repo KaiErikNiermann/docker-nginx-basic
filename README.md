@@ -21,14 +21,16 @@ This is a *very* basic configuration, while I will likely work on improving it, 
       - [Docker Compose](#docker-compose)
       - [Reverse Proxy](#reverse-proxy)
     - [4. Certbot and SSL](#4-certbot-and-ssl)
+      - [Note](#note)
     - [5. The Workflow](#5-the-workflow)
       - [Setup SSH and Known Hosts](#setup-ssh-and-known-hosts)
       - [Make Sure VM is Running](#make-sure-vm-is-running)
       - [Deployment](#deployment)
+    - [Resources](#resources)
 
 ## Why
 
-While there are likely more straightforward approaches when it comes to manually setting up some hosting configuration, this was personally a nice exploration into some of the more low-level aspects of hosting and deployment, and I hope it helps anyone else as well. Additionally its nice to have a reference for some of the fundamentals.
+While there are likely more straightforward approaches when it comes to manually setting up some hosting configuration, this was personally a nice exploration into some of the more manual aspects of hosting and deployment, and I hope it helps anyone else aswell. Additionally its nice to have a reference for some of the fundamentals.
 
 ## Basic Idea and Technologies
 
@@ -121,9 +123,7 @@ Here is where the spicy part comes in. If we, for example, want the route `asdfx
 location /api/ {
     # backend is the name of the container, don't use `localhost`
     proxy_pass http://backend:3000/;
-    proxy_set_header Host $host;
-    proxy_set_header X-Real-IP $remote_addr;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    ... 
 }
 ```
 
@@ -152,6 +152,10 @@ docker compose run --rm --entrypoint "\
 echo
 ```
 
+#### Note
+
+Honestly unless you are working with something on a larger scale I don't know if I would recommend using docker here, even [*the docs*](https://eff-certbot.readthedocs.io/en/stable/install.html#snap-recommended) advise against it because there is a much smoother [*automated method*](https://certbot.eff.org/instructions) for doing things, so just be aware of that when going into things.
+
 ### 5. The Workflow
 
 Finally, to automate the deployment process, we can do a simple SSH into the VM and then just build and run the containers.
@@ -167,3 +171,15 @@ This is where you can get a bit spicy using something like Terraform to define y
 #### Deployment
 
 For the actual deployment, since we set the SSH key, we can simply do `ssh username@hostname 'echo "you are in the vm"'` to run the required commands in the VM.
+
+### Resources
+
+These are most of the resources that I used in the processes of learning about how to set this up and getting everything working smoothly
+
+- [*nginx beginners guide*](http://nginx.org/en/docs/beginners_guide.html)
+- [*docker nginx guide*](https://www.baeldung.com/linux/nginx-docker-container)
+- [*cerbot docker guide 1*](https://mindsers.blog/post/https-using-nginx-certbot-docker/)
+- [*certbot docker guide 2*](https://www.programonaut.com/setup-ssl-with-docker-nginx-and-lets-encrypt/)
+- [*applied example docker/nginx/svelte*](https://github.com/woollysammoth/sveltekit-docker-nginx)
+- [*certbot docs*](https://eff-certbot.readthedocs.io/en/stable/)
+- [*basic nginx security*](https://www.acunetix.com/blog/web-security-zone/hardening-nginx/)
