@@ -183,3 +183,5 @@ These are most of the resources that I used in the processes of learning about h
 - [*applied example docker/nginx/svelte*](https://github.com/woollysammoth/sveltekit-docker-nginx)
 - [*certbot docs*](https://eff-certbot.readthedocs.io/en/stable/)
 - [*basic nginx security*](https://www.acunetix.com/blog/web-security-zone/hardening-nginx/)
+- [*a secure nginx configuration*](https://github.com/EsadCetiner/Secure-Nginx-Config/blob/main/nginx.conf)
+- [*essential security headers*](https://www.sentrium.co.uk/labs/application-security-101-http-headers)
