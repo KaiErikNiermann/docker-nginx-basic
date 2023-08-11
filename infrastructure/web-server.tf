@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "www-1" {
+resource "digitalocean_droplet" "web-server" {
   image  = "ubuntu-20-04-x64"
-  name   = "www-1"
+  name   = "web-server"
   region = "fra1"
   size   = "s-1vcpu-1gb"
   user_data = file("setup_docker.sh")
