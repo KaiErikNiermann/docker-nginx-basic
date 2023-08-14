@@ -3,7 +3,6 @@ resource "digitalocean_droplet" "web-server" {
   name   = "web-server"
   region = "fra1"
   size   = "s-1vcpu-1gb"
-  user_data = file("setup_docker.sh")
   ssh_keys = [
     data.digitalocean_ssh_key.main-server-key.id
   ]
@@ -14,5 +13,17 @@ resource "digitalocean_droplet" "web-server" {
     type        = "ssh"
     private_key = file(var.pvt_key)
     timeout     = "2m"
+  }
+
+  provisioner "file" {
+    source = "setup_docker.sh"
+    destination = "/tmp/setup_docker.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/setup_docker.sh",
+      "sudo /tmp/setup_docker.sh"
+    ]
   }
 }
